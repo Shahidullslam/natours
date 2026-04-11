@@ -107,7 +107,11 @@ body {
   background-color: #20bf6b;
 }
 .alert--error {
+<<<<<<< HEAD
   background-color: #ad302e;
+=======
+  background-color: #eb4d4b;
+>>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
 }
 
 .heading-secondary {

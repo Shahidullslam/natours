@@ -28,7 +28,11 @@ const toursSchema = new mongoose.Schema(
         message: "Difficulty is either: easy, medium, difficult",
       },
     },
+<<<<<<< HEAD
     ratingsQuantity: {
+=======
+    ratingsquantity: {
+>>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
       type: Number,
       default: 0,
     },
@@ -37,7 +41,11 @@ const toursSchema = new mongoose.Schema(
       default: 4.5,
       min: [1, "Rating must be above 1.0"],
       max: [5, "Rating must be below 5.0"],
+<<<<<<< HEAD
        set: val => Math.round(val * 10) / 10 //4.6666, 46.666, 47, 4.7
+=======
+      // set: val => Math.round(val * 10) / 10 //4.6666, 46.666, 47, 4.7
+>>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
     },
     price: {
       type: Number,
@@ -78,6 +86,7 @@ const toursSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+<<<<<<< HEAD
     startLocation: {
       //GeoJSON
       type: {
@@ -108,12 +117,15 @@ const toursSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
+=======
+>>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
   },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
 );
+<<<<<<< HEAD
 toursSchema.index({ price: 1, ratingsAverage: -1 });
 toursSchema.index({ slug: 1 });
 toursSchema.index({ startLocation: "2dsphere" });
@@ -127,15 +139,23 @@ toursSchema.virtual("reviews", {
   localField: "_id",
 });
 
+=======
+toursSchema.virtual("durationWeeks").get(function () {
+  return this.duration / 7;
+});
+>>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
 toursSchema.pre("save", function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
 });
+<<<<<<< HEAD
 // toursSchema.pre("save", async function (next) {
 //   this.guidesPromises=this.guides.map(async id=>await User.findById(id));
 //   this.guides=await Promise.all(this.guidesPromises);
 //   next();
 // });
+=======
+>>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
 // toursSchema.post("save", function (doc, next) {
 //   console.log(doc);
 //   next();
@@ -151,6 +171,7 @@ toursSchema.post(/^find/, function (docs, next) {
   console.log(`Query took ${Date.now() - this.start} milliseconds!`);
   next();
 });
+<<<<<<< HEAD
 toursSchema.pre(/^find/, function (next) {
   this.populate({path:"guides",
     select:'-__v -passwordChangedAt'
@@ -163,5 +184,13 @@ toursSchema.pre(/^find/, function (next) {
 //   console.log(this.pipeline());
 //   next();
 // });
+=======
+//Aggregation Middleware
+toursSchema.pre("aggregate", function (next) {
+  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
+  console.log(this.pipeline());
+  next();
+});
+>>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
 const Tour = mongoose.model("Tour", toursSchema);
 module.exports = Tour;

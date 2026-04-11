@@ -9,7 +9,11 @@ class APIFeatures {
     excludedFields.forEach((el) => delete queryObj[el]);
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+<<<<<<< HEAD
     this.query=this.query.find(JSON.parse(queryStr));
+=======
+    this.query.find(JSON.parse(queryStr));
+>>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
     return this;
   }
   sort() {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require('express');
 const authController = require('./../controller/authController');
 const tourController = require('./../controller/tourController');
@@ -50,4 +51,17 @@ tourRouter.route('/distances/:latlng/unit/:unit').get(tourController.getDistance
 //       reviewController.createReview
 //     );
 tourRouter.use('/:tourId/reviews',reviewRouter);
+=======
+const express = require("express");
+const tourController = require("./../controller/tourController");
+const { getAllTours, getTour, createTour, updateTour, deleteTour } =
+  tourController;
+const tourRouter = express.Router();
+// tourRouter.param("id", tourController.checkID);
+tourRouter.route("/top-5-cheap").get(tourController.aliasTopTours, getAllTours);
+tourRouter.route("/tour-stats").get(tourController.getTourStats);
+tourRouter.route("/monthly-plan/:year").get(tourController.getMonthlyPlan);
+tourRouter.route("/").get(getAllTours).post(createTour);
+tourRouter.route("/:id").get(getTour).patch(updateTour).delete(deleteTour);
+>>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
 module.exports = tourRouter;
