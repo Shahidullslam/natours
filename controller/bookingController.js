@@ -1,18 +1,22 @@
 const catchAsync = require('../utils/catchAsync');
+const factory = require('./handlerFactory');
+const AppError = require('../utils/appError');
 const Tour = require('../models/tourModel');
-// const Booking = require('../models/bookingModel');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const Booking = require('../models/bookingsModel');
+const stripe = process.env.STRIPE_SECRET_KEY ? require('stripe')(process.env.STRIPE_SECRET_KEY) : null;
+
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
+  if (!stripe) {
+    return next(new AppError('Stripe is not configured. Please add STRIPE_SECRET_KEY.', 500));
+  }
+
   // 1) Get the currently booked tour
   const tour = await Tour.findById(req.params.tourId);
- 
+
   // 2) Create checkout session
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
-    // success_url: `${req.protocol}://${req.get('host')}/?tour=${
-    //   req.params.tourId
-    // }&user=${req.user.id}&price=${tour.price}`,
-    success_url: `${req.protocol}://${req.get('host')}/my-tours?alert=booking`,
+    success_url: `${req.protocol}://${req.get('host')}/api/v1/bookings/checkout-success?tour=${tour.id}&user=${req.user.id}&price=${tour.price}&slug=${tour.slug}`,
     cancel_url: `${req.protocol}://${req.get('host')}/tour/${tour.slug}`,
     customer_email: req.user.email,
     client_reference_id: req.params.tourId,
@@ -34,6 +38,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     ],
     mode: 'payment',
   });
+
   // 3) Create session as response
   res.status(200).json({
     status: 'success',
@@ -41,12 +46,30 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   });
 });
 
-// exports.createBookingCheckout = catchAsync(async (req, res, next) => {
-//   // This is only TEMPORARY, because it's UNSECURE: everyone can make bookings without paying
-//   const { tour, user, price } = req.query;
+exports.createBookingCheckout = catchAsync(async (req, res, next) => {
+  const { tour, user, price, slug } = req.query;
 
-//   if (!tour && !user && !price) return next();
-//   await Booking.create({ tour, user, price });
+  if (!tour && !user && !price) return next();
 
-//   res.redirect(req.originalUrl.split('?')[0]);
-// });
+  await Booking.create({
+    tour,
+    user,
+    price,
+  });
+
+  res.redirect(`${req.protocol}://${req.get('host')}/tour/${slug || ''}?alert=booking`);
+});
+
+const createBooking = factory.createOne(Booking);
+const getBooking = factory.getOne(Booking);
+const getAllBookings = factory.getAll(Booking);
+const updateBooking = factory.updateOne(Booking);
+const deleteBooking = factory.deleteOne(Booking);
+
+module.exports = {
+  createBooking,
+  getBooking,
+  getAllBookings,
+  updateBooking,
+  deleteBooking,
+};

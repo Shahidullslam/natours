@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const User = require("./../models/userModel");
 const multer=require('multer');
 const sharp=require('sharp');
@@ -56,21 +55,12 @@ const filterObj = (obj, ...allowedFields) => {
 //   });
 
 // });
-=======
-exports.getAllUsers = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is not yet defined!",
-  });
-};
->>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
 exports.createUser = (req, res) => {
   res.status(500).json({
     status: "error",
     message: "This route is not yet defined!",
   });
 };
-<<<<<<< HEAD
 exports.getUser =factory.getOne(User)
 
 exports.updateUser = factory.updateOne(User);
@@ -125,24 +115,3 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
-=======
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is not yet defined!",
-  });
-};
-
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is not yet defined!",
-  });
-};
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is not yet defined!",
-  });
-};
->>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa

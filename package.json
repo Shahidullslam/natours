@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "natours",
   "version": "1.0.0",
   "description": "Learning node,express and mongodb",
@@ -7,18 +8,13 @@
     "start": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
     "debug": "nbd server.js",
-<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch:js": "parcel watch ./starter/public/js/index.js --out-dir ./starter/public/js --out-file bundle.js",
-    "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
-=======
-    "test": "echo \"Error: no test specified\" && exit 1"
->>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
+    "watch:js": "parcel watch starter/public/js/index.js --out-dir ./starter/public/js --out-file bundle.js",
+    "build:js": "parcel watch public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
   "author": "shahid",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
     "@babel/polyfill": "^7.12.1",
     "axios": "^1.11.0",
     "bcryptjs": "^3.0.2",
@@ -54,13 +50,5 @@
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5"
-=======
-    "dotenv": "^17.2.1",
-    "express": "^4.21.2",
-    "mongoose": "^5.13.23",
-    "morgan": "^1.10.1",
-    "slugify": "^1.6.6",
-    "validator": "^13.15.15"
->>>>>>> fa1bd6eabc093acdafe524ca633fe1b9143b2daa
   }
 }
