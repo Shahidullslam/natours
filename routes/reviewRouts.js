@@ -8,12 +8,11 @@ router.use(authController.protect);
 router
   .route('/')
   .get(
-    
-    authController.restrictTo('users'),
+    authController.restrictTo('user'),
     reviewController.getAllReviews,
   )
   .post(
-     authController.restrictTo('users'),
+    authController.restrictTo('user'),
     reviewController.setTourUserIds,
     reviewController.createReview,
   );

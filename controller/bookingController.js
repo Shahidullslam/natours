@@ -60,6 +60,8 @@ exports.createBookingCheckout = catchAsync(async (req, res, next) => {
   res.redirect(`${req.protocol}://${req.get('host')}/tour/${slug || ''}?alert=booking`);
 });
 
+const getCheckoutSession = exports.getCheckoutSession;
+const createBookingCheckout = exports.createBookingCheckout;
 const createBooking = factory.createOne(Booking);
 const getBooking = factory.getOne(Booking);
 const getAllBookings = factory.getAll(Booking);
@@ -67,6 +69,8 @@ const updateBooking = factory.updateOne(Booking);
 const deleteBooking = factory.deleteOne(Booking);
 
 module.exports = {
+  getCheckoutSession,
+  createBookingCheckout,
   createBooking,
   getBooking,
   getAllBookings,

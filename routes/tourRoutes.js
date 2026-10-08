@@ -25,7 +25,7 @@ tourRouter
 tourRouter
   .route('/')
   .get( getAllTours)
-  .post(authController.protect,authController.restrictTo('admin','lead_guide'),createTour);
+  .post(authController.protect,authController.restrictTo('admin','lead-guide'),createTour);
 tourRouter.route('/tours-within/:distance/center/:latlng/unit/:unit')
   .get(tourController.getToursWithin);
 // /tours-distance?distance=233&center=-40,45&unit=mi
