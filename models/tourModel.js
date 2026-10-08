@@ -147,10 +147,10 @@ toursSchema.pre(/^find/, function (next) {
   this.start = Date.now();
   next();
 });
-toursSchema.post(/^find/, function (docs, next) {
-  console.log(`Query took ${Date.now() - this.start} milliseconds!`);
-  next();
-});
+// toursSchema.post(/^find/, function (docs, next) {
+//   console.log(`Query took ${Date.now() - this.start} milliseconds!`);
+//   next();
+// });
 toursSchema.pre(/^find/, function (next) {
   this.populate({path:"guides",
     select:'-__v -passwordChangedAt'

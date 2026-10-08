@@ -15,6 +15,7 @@ const globalErrorHandler = require("./controller/errorController");
 const viewRouter=require('./routes/viewRoutes')
 const app = express();
 const cookieParser=require('cookie-parser')
+const compression=require('compression')
 
 app.set('view engine','pug');
 app.set('views',path.join(__dirname,'views'))
@@ -53,6 +54,7 @@ app.use(hpp({
 }));
 
 app.use(express.json());
+app.use(compression());
 
 // app.use((req, res, next) => {
 //   console.log("Hello from the middleware");

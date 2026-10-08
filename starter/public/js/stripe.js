@@ -4,7 +4,7 @@ const stripeKey = 'pk_test_51SEOj6CCDiZJWueANPtdWP05DDsvWcEkXuZDqTJDtPSWPnvDqh7B
 
 export const bookTour = async (tourId) => {
   if (typeof window === 'undefined' || !window.Stripe) {
-    console.warn('Stripe is not loaded yet.');
+    // console.warn('Stripe is not loaded yet.');
     return;
   }
 
@@ -17,7 +17,7 @@ export const bookTour = async (tourId) => {
     });
 
     if (result.error) {
-      console.error(result.error.message);
+      // console.error(result.error.message);
     }
   } catch (err) {
     console.error('Checkout session error:', err.response ? err.response.data : err.message);

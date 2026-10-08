@@ -11,7 +11,7 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-settings');
 const bookBtn = document.getElementById('book-tour');
-console.log('mapBox element:', mapBox);
+// console.log('mapBox element:', mapBox);
 if (mapBox) {
   const locations = JSON.parse(
     mapBox.dataset.locations
